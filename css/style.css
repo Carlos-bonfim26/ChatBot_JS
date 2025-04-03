@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+:root{
+--body:#C2FFF9;
+--chatbotColor:#028090;
+--white:#fff;
+--black:#141414;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+main{
+    background-color: var(--body);
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    font-family: "Quicksand", sans-serif;
+    align-items: center;
+    justify-content: flex-end;
+}
+/* chat */
+.containerChat{
+    padding: 0 1rem;
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.sectionChat{
+  background-color: var(--white);
+  height: 32rem;
+  width: 20rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+/* header chat */
+.headerChat{
+width: 100%;
+height: 12%;
+background-color: var(--chatbotColor);
+padding: 0.3rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+color: var(--white);
+font-weight: 600;
+}
+.headerTittle{
+    display: flex;
+    align-items: center;
+}
+.robochat{
+    margin-right: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    border-radius: 50%;
+    background-color: var(--white);
+    color: var(--chatbotColor);
+}
+.fa-angle-down{
+    font-size: 1.1rem;
+}
+.close{
+    border-radius: 50%;
+    width: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    background-color: transparent;
+    height: 2rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease-in;
+}
+.close:hover{
+    background-color: #026B79;
+}
+/* chat */
+.chat{
+    width: 100%;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    padding: 0.4rem 0.2rem;
+    gap: 0.3rem;
+}
+.message{
+    display: flex;
+    gap: 0.2rem;
+    width: 100%;
+}
+.message p{
+    font-size: 0.8rem;
+    width: 85%;
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+    border: none;
+    
+}
+.messageBot p{
+    background-color: var(--body);
+}
+.messageUser p{
+    background-color: #eeeeee;
+}
+.messageBot .robochat{
+    background-color: var(--chatbotColor);
+    color: var(--white);
+}
+.userchat{
+    background-color: #1D2D44;
+    color: var(--white);
+    margin-right: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+/* Mensagem input */
+.messageInput{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.3rem;
+}
+.messageInput input{
+    width: 93%;
+    height: 2.2rem;
+    padding: 0 0.2rem;
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 0 0 0.4rem 0.05rem rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+/* botão */
+.btnChat{
+    background-color: var(--chatbotColor);
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    color: var(--white);
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 0 0.4rem 0.3rem rgba(0,0,0,0.1);
+    transition: 0.3s ease-in;
+    cursor: pointer;
+}
+.btnChat:hover{
+    background-color: #02C39A;
+    box-shadow: 0 0 0.4rem 0.5rem rgba(0,0,0,0.1);
+}
