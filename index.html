@@ -25,7 +25,7 @@
                 <div class="chat">
                 <div class="message messageBot">
                     <div class="robochat"><i class="fa-solid fa-robot"></i></div>
-                    <p class="bot-message">Olá, eu sou o Bot, como posso te ajudar hoje?</p>
+                    <div class="textMessage">Olá, eu sou o Bot, como posso te ajudar hoje?</div>
                 </div>
              
                 </div>
@@ -34,8 +34,11 @@
                     <div class="inputOptions">
                         <input type="text" id="inputUser" required
                         placeholder="Escreva algo...">
-                        <i class="fa-solid fa-face-smile-wink"></i>
-                        <i class="fa-solid fa-paperclip"></i>
+                        <button class="smile-btn"><i class="fa-solid fa-face-smile-wink"></i></button>
+
+                        <div class="file-upload-wrapper">
+                          <input type="file" accept="images/*" id="fileInput" hidden>
+                          <button class="file-upload"><i class="fa-solid fa-paperclip"></i></button></div>
                         <button class="submitMessage">
                             <i class="fa-solid fa-paper-plane"></i>
                         </button>

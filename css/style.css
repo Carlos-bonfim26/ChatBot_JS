@@ -114,7 +114,7 @@ font-weight: 600;
     
     width: 100%;
 }
-.message p{
+.message .textMessage{
     font-size: 0.8rem;
    min-height: 1.8rem;
     border-radius: 0.5rem;
@@ -122,7 +122,7 @@ font-weight: 600;
     border: none;
     max-width: 75%;
 }
-.messageBot p{
+.messageBot .textMessage{
     background-color: var(--body);
 }
 .messageUser{
@@ -131,7 +131,7 @@ font-weight: 600;
     align-items: center;
 }
 
-.messageUser p{
+.messageUser .textMessage{
     background-color: #eeeeee;
 }
 .messageBot .robochat{
@@ -259,4 +259,13 @@ box-shadow: 0 0 0.4rem 0.05rem rgba(0, 0, 0, 0.1);
 .btnChat:hover{
     background-color: #02C39A;
     box-shadow: 0 0 0.4rem 0.5rem rgba(0,0,0,0.1);
+}
+.file-upload, .smile-btn{
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    font-size: 1rem;
+}
+.imgFileUChat{
+    width: 6rem;
 }
