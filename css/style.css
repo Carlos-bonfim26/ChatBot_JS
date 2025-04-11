@@ -127,6 +127,7 @@ font-weight: 600;
 }
 .messageUser{
     display: flex;
+   word-wrap: break-word;
     justify-content: flex-end;
     align-items: center;
 }
@@ -266,6 +267,55 @@ box-shadow: 0 0 0.4rem 0.05rem rgba(0, 0, 0, 0.1);
     height: 100%;
     font-size: 1rem;
 }
-.imgFileUChat{
-    width: 6rem;
+ .imgFileUChat{
+    margin-top: 0.2rem;
+    width: 50%;
+    border-radius: 0.5rem;
 }
+.file-upload-wrapper{
+    height: 2.18rem;
+    width: 2.18rem;
+    position: relative;
+}
+.file-upload-wrapper img{
+    display: none;
+}
+.file-upload-wrapper :where(img, button){
+    position: absolute;
+}
+.cancel-file i{
+    color: red;
+    font-size: 1.5rem;
+   
+}
+
+.cancel-file{
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    align-items: center;
+    justify-content: center;
+  display: none;
+  transition: 0.3s ease-in;
+}
+.file-upload-wrapper:where(img, .cancel-file) .file-upload{
+    display: none;
+}
+ .file-uploaded img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.file-upload-wrapper:where(.file-uploaded) .file-upload{
+    display: none;
+}
+.file-upload-wrapper:where(.file-uploaded:hover) .cancel-file{
+    display: block;
+}
+
+ .file-uploaded img{
+    display: block;
+} 

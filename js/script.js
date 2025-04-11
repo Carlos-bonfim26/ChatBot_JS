@@ -5,6 +5,8 @@ const btnIcon = document.querySelector('.btnChat i')
 const inputUser = document.getElementById('inputUser');
 const btnsubmitMessage = document.querySelector('.submitMessage');
 const fileInput = document.querySelector('#fileInput');
+const fileUploadWrapper = document.querySelector('.file-upload-wrapper');
+const fileCancelButton = document.querySelector('.cancel-file')
 
 const userData ={
     message :null,
@@ -72,7 +74,7 @@ const requestOptions = {
             parts: [{text: userData.message}, ...(userData.file.data? [{inline_data: userData.file}]: [])]
     }]
     })
-}
+} 
 try {
    const response = await fetch(API_URL, requestOptions ) 
    const data = await response.json();
@@ -83,10 +85,13 @@ try {
    const apiResponseText = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, "$1").trim();
    messageElement.innerHTML = apiResponseText;
 } catch (error) {
+    //tratamento de erro
     console.log(error);
     messageElement.innerText = "Desculpe mas ouve um erro na requisição, tente novamente mais tarde!";
     messageElement.style.color = "red";
 } finally{
+    //reseta e tira a foto bo bot
+    userData.file = {};
     incomingMessageDiv.classList.remove('thinking-indicator');
     chatBody.scrollTo({top: chatBody.scrollHeight, behavior: "smooth"});
 }
@@ -143,9 +148,12 @@ fileInput.addEventListener('change', ()=>{
     if(!file) return;
 
     const reader = new FileReader();
-    reader.onload = (e)=>{
+    reader.onload = (e) => {
 
-        const base64String = e.target.result.split(',')[1];
+fileUploadWrapper.querySelector('img').src = e.target.result;
+
+fileUploadWrapper.classList.add('file-uploaded');
+const base64String = e.target.result.split(',')[1];
 
         userData.file ={
             data:base64String,
@@ -154,8 +162,14 @@ fileInput.addEventListener('change', ()=>{
 
         fileInput.value= "";
     }
-
+  console.log("arquivo enviado", userData.file);
     reader.readAsDataURL(file);
+})
+
+fileCancelButton.addEventListener('click', ()=>{
+
+    userData.file ={};
+    fileUploadWrapper.classList.remove('file-uploaded');
 })
 
 btnsubmitMessage.addEventListener('click', (e)=> handleOutgoingMessage(e))
