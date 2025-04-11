@@ -15,6 +15,9 @@ const userData ={
         mime_type:null,
     }
 }
+
+const chatHistory = [];
+
 //variaveis para a API
 const API_KEY = "AIzaSyCKuk2AnaOgcCvS1zd2g-xwNtNwUQRHLxs";
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`
@@ -63,6 +66,11 @@ return div;
 }
 const generateBotResponse = async (incomingMessageDiv)=>{
 const messageElement = incomingMessageDiv.querySelector('.messageBot .textMessage');
+chatHistory.push({
+    //para manter o contexto da conversa puxa informações das mensagens anteriores com o usuário
+    role: "user",
+    parts: [{text: userData.message}, ...(userData.file.data? [{inline_data: userData.file}]: [])]
+})
 
     //api requisição de opções
 const requestOptions = {
@@ -70,9 +78,7 @@ const requestOptions = {
     Headers: {
         "Content-Type": "application/json"},
     body: JSON.stringify({
-        contents:[{
-            parts: [{text: userData.message}, ...(userData.file.data? [{inline_data: userData.file}]: [])]
-    }]
+        contents:chatHistory
     })
 } 
 try {
@@ -84,6 +90,12 @@ try {
 //extração da resposta do bot para texto na tela
    const apiResponseText = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, "$1").trim();
    messageElement.innerHTML = apiResponseText;
+
+   //puxa as informações da API
+   chatHistory.push({
+    role: "model",
+    parts: [{text: apiResponseText}]
+})
 } catch (error) {
     //tratamento de erro
     console.log(error);
@@ -101,7 +113,7 @@ const handleOutgoingMessage = (e) =>{
     e.preventDefault();
    userData.message = inputUser.value.trim();
     inputUser.value = "";
-
+    fileUploadWrapper.classList.remove('file-uploaded');
 
     const messageContent = `
   ${userData.message}
@@ -171,6 +183,27 @@ fileCancelButton.addEventListener('click', ()=>{
     userData.file ={};
     fileUploadWrapper.classList.remove('file-uploaded');
 })
+
+
+const picker = new EmojiMart.Picker({
+theme: "light",
+skinTonePosition: "none",
+previewPosition: "none",
+onEmojiSelect:(emoji) =>{
+    const{selectionStart: start, selectionEnd: end} = inputUser;
+    inputUser.setRangeText(emoji.native, start, end, "end");
+    inputUser.focus();
+},
+onClickOutside: (e)=>{
+    if(e.target.id == "emoji-btn"){
+        document.body.classList.toggle('emoji-open');
+    }else{
+        document.body.classList.remove('emoji-open');
+    }
+}
+});
+document.querySelector(".inputOptions").appendChild(picker);
+
 
 btnsubmitMessage.addEventListener('click', (e)=> handleOutgoingMessage(e))
 document.querySelector('.file-upload').addEventListener('click', ()=>{
